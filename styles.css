@@ -1,0 +1,739 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000000;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    cursor: default;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.power-button {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.power-button:hover {
+    transform: scale(1.05);
+}
+
+.power-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+
+.power-button:hover .power-icon {
+    border-color: #00ff00;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+}
+
+.power-button:hover .power-icon svg {
+    filter: drop-shadow(0 0 5px rgba(0, 255, 0, 0.5));
+}
+
+.power-button:hover .power-icon svg line,
+.power-button:hover .power-icon svg circle {
+    stroke: #00ff00;
+}
+
+.power-indicator {
+    width: 8px;
+    height: 8px;
+    background-color: #00ff00;
+    border-radius: 50%;
+    margin-top: 15px;
+    box-shadow: 0 0 10px #00ff00;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+}
+
+.power-button:active {
+    transform: scale(0.95);
+}
+
+.power-button:active .power-icon {
+    background-color: rgba(0, 255, 0, 0.1);
+}
+
+/* Android Screen Styles */
+.android-screen {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s ease;
+    transform: scale(0.8);
+}
+
+.android-screen.show {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.android-logo {
+    margin-bottom: 40px;
+    animation: androidFloat 2s ease-in-out infinite;
+}
+
+@keyframes androidFloat {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.loading-container {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loading-line {
+    width: 100%;
+    height: 4px;
+    background-color: #333333;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.loading-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #a4c639, #7fb91a);
+    border-radius: 2px;
+    width: 0%;
+    animation: loadingProgress 3s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(164, 198, 57, 0.5);
+}
+
+@keyframes loadingProgress {
+    0% {
+        width: 0%;
+    }
+    50% {
+        width: 70%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+/* Hide power button when Android screen is shown */
+.power-button.hide {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.8);
+}
+
+/* Lock Screen Styles */
+.lock-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.8s ease;
+    color: white;
+    text-align: center;
+}
+
+.lock-screen.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(1px);
+}
+
+.status-bar {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.day {
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.time-display {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.current-time {
+    font-size: 120px;
+    font-weight: 200;
+    letter-spacing: -2px;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    margin-top: -60px;
+}
+
+.user-profile {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.user-profile:hover {
+    transform: scale(1.05);
+}
+
+.avatar-container {
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.user-info {
+    text-align: center;
+}
+
+.user-name {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.unlock-text {
+    font-size: 16px;
+    font-weight: 300;
+    opacity: 0.9;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Hide Android screen when lock screen is shown */
+.android-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.8);
+}
+
+/* Android Home Screen Styles */
+.android-home {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.6s ease;
+    overflow: hidden;
+}
+
+.android-home.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.android-home.hide {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.95);
+}
+
+.home-background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* Android Status Bar */
+.android-status-bar {
+    position: relative;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 20px;
+    height: 24px;
+    background: rgba(0, 0, 0, 0.2);
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.status-icons {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.wifi-icon, .battery-icon {
+    font-size: 12px;
+}
+
+.battery-percentage {
+    font-size: 12px;
+    margin-left: 2px;
+}
+
+/* Search Widget */
+.search-widget {
+    position: relative;
+    z-index: 10;
+    margin: 20px 20px 40px 20px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 25px;
+    padding: 12px 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-icon, .mic-icon {
+    font-size: 18px;
+    color: #666;
+}
+
+.search-text {
+    flex: 1;
+    margin: 0 15px;
+    color: #666;
+    font-size: 16px;
+}
+
+/* App Grid */
+.app-grid {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 20px 40px;
+    flex: 1;
+    align-content: start;
+}
+
+.app-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.app-icon:hover {
+    transform: scale(1.1);
+}
+
+.app-icon:active {
+    transform: scale(0.95);
+}
+
+.icon-bg {
+    width: 60px;
+    height: 60px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.icon-text {
+    font-size: 28px;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.app-label {
+    color: white;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* Android Dock */
+.android-dock {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 30px;
+    padding: 15px 20px 20px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 25px 25px 0 0;
+    margin: 0 20px;
+}
+
+.dock-icon {
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dock-icon:hover {
+    transform: scale(1.05);
+}
+
+.dock-icon:active {
+    transform: scale(0.95);
+}
+
+.dock-icon-bg {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dock-icon-text {
+    font-size: 20px;
+    color: white;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.dock-icon-bg svg {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.dock-label {
+    color: white;
+    font-size: 10px;
+    font-weight: 400;
+    margin-top: 4px;
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+    opacity: 0.9;
+}
+
+/* Page Indicator */
+.page-indicator {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+}
+
+.indicator-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+.indicator-dot.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+/* Hide lock screen when home screen is shown */
+.lock-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+}
+
+/* About Screen Styles */
+.about-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+    transform: translateX(100%);
+    z-index: 200;
+}
+
+.about-screen.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.about-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    min-height: 60px;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.back-button:active {
+    transform: scale(0.95);
+}
+
+.back-arrow {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.about-title {
+    font-size: 24px;
+    font-weight: 500;
+    color: white;
+    text-align: center;
+}
+
+.header-spacer {
+    width: 40px;
+}
+
+.about-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    color: white;
+}
+
+.profile-section {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+}
+
+.profile-avatar {
+    margin-bottom: 20px;
+}
+
+.avatar-large {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    margin: 0 auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.profile-name {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.profile-title {
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0;
+}
+
+.about-text {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.about-text p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.about-text p:last-child {
+    margin-bottom: 0;
+}
+
+.expertise-section {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-align: center;
+    color: white;
+}
+
+.expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+}
+
+.expertise-item {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 12px 16px;
+    transition: all 0.2s ease;
+}
+
+.expertise-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.expertise-icon {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.expertise-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* Animation for sliding in from right */
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Animation for sliding out to right */
+@keyframes slideOutToRight {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+} 
