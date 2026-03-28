@@ -287,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         break;
                     case 'resume':
                         // Open resume from Google Drive
-                        window.open('https://drive.google.com/file/d/1a2Z0LIkga2j9exx4Kvv08IoSedSFd-Ky/view?usp=sharing', '_blank');
+                        window.open('https://drive.google.com/file/d/1ceyaaEz2zKI-Nfn6D7tIUXouDyInk5xm/view?usp=sharing', '_blank');
                         break;
                     default:
                         console.log(`No action defined for ${app}`);
