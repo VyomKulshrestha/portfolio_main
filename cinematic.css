@@ -53,6 +53,14 @@
     text-shadow: 0 2px 7px rgba(0, 0, 0, 0.95), 0 0 2px #000;
 }
 
+.power-button:focus-visible,
+.lock-screen:focus-visible,
+.app-icon:focus-visible,
+.dock-icon:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 5px;
+}
+
 .android-dock {
     width: min(430px, calc(100% - 40px));
     margin: 0 auto 18px;

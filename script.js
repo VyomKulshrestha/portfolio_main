@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
         link.setAttribute('rel', 'noopener noreferrer');
     });
 
-    document.querySelectorAll('.app-icon, .dock-icon, .contact-card').forEach(control => {
+    document.querySelectorAll('.power-button, .lock-screen, .app-icon, .dock-icon, .contact-card').forEach(control => {
         control.setAttribute('role', 'button');
         control.setAttribute('tabindex', '0');
         control.addEventListener('keydown', event => {
@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 androidScreen.classList.add('hide');
                 setTimeout(() => {
                     lockScreen.classList.add('show');
+                    lockScreen.focus();
                 }, 500);
             }, 4000);
             
@@ -84,6 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show Android home screen after transition
         setTimeout(() => {
             androidHome.classList.add('show');
+            document.querySelector('.app-icon')?.focus();
         }, 300);
         
         console.log('Lock screen unlocked! Showing home screen...');
@@ -116,18 +118,28 @@ document.addEventListener('DOMContentLoaded', function() {
         contact: contactScreen
     };
 
-    function openScreen(screen) {
+    let activeLauncherControl = null;
+
+    function openScreen(screen, launcherControl) {
         if (!screen) return;
+        activeLauncherControl = launcherControl || null;
         androidHome.classList.add('hide');
         screen.classList.remove('closing');
-        setTimeout(() => screen.classList.add('show'), 120);
+        setTimeout(() => {
+            screen.classList.add('show');
+            screen.querySelector('.back-button')?.focus();
+        }, 120);
     }
 
     function closeScreen(screen) {
         if (!screen) return;
         screen.classList.add('closing');
         setTimeout(() => androidHome.classList.remove('hide'), 100);
-        setTimeout(() => screen.classList.remove('show', 'closing'), 500);
+        setTimeout(() => {
+            screen.classList.remove('show', 'closing');
+            activeLauncherControl?.focus();
+            activeLauncherControl = null;
+        }, 500);
     }
     
     appIcons.forEach(icon => {
@@ -135,8 +147,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const app = this.getAttribute('data-app');
             console.log(`Clicked on ${app} app`);
 
-            openScreen(appScreens[app]);
+            openScreen(appScreens[app], this);
         });
+    });
+
+    document.addEventListener('keydown', event => {
+        if (event.key !== 'Escape') return;
+        const visibleScreen = Object.values(appScreens).find(screen => screen.classList.contains('show'));
+        if (visibleScreen) closeScreen(visibleScreen);
     });
     
     // Back button click handler for about screen
