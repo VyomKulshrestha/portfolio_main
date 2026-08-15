@@ -1,0 +1,180 @@
+/* Final presentation layer. Loaded after the legacy screen styles so every
+   Android-style app keeps the same readable, cinematic visual system. */
+
+:root {
+    --surface-0: #07090f;
+    --surface-1: #0d111b;
+    --surface-2: rgba(18, 24, 37, 0.88);
+    --text-strong: #f7f4ed;
+    --text-body: #d8dce5;
+    --text-muted: #aeb7c7;
+    --line: rgba(255, 255, 255, 0.13);
+    --cyan: #69e6ff;
+    --violet: #a494ff;
+}
+
+/* Android launcher: familiar grid, wallpaper depth, and restrained motion. */
+.android-home {
+    background:
+        linear-gradient(180deg, rgba(6, 11, 24, 0.12), rgba(3, 6, 14, 0.58)),
+        url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80') center/cover;
+}
+
+.home-background-overlay {
+    background:
+        radial-gradient(circle at 50% 18%, rgba(90, 119, 255, 0.18), transparent 38%),
+        linear-gradient(180deg, rgba(3, 6, 14, 0.26), rgba(3, 6, 14, 0.52) 72%, rgba(2, 4, 10, 0.76));
+}
+
+.app-grid {
+    width: min(760px, calc(100% - 40px));
+    margin: 0 auto;
+    grid-template-columns: repeat(4, minmax(90px, 1fr));
+    align-content: start;
+    gap: 34px 28px;
+    padding: clamp(44px, 9vh, 88px) 20px 28px;
+}
+
+.app-icon {
+    min-height: 94px;
+    justify-content: flex-start;
+}
+
+.app-icon .icon-bg {
+    width: 64px;
+    height: 64px;
+    border-radius: 17px;
+    animation: none !important;
+}
+
+.app-label,
+.dock-label {
+    color: #fff;
+    text-shadow: 0 2px 7px rgba(0, 0, 0, 0.95), 0 0 2px #000;
+}
+
+.android-dock {
+    width: min(430px, calc(100% - 40px));
+    margin: 0 auto 18px;
+    padding: 13px 26px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 26px;
+    background: rgba(8, 12, 21, 0.64);
+    box-shadow: 0 18px 46px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+/* App windows share one dark, high-contrast palette. */
+:is(.about-screen, .projects-screen, .publications-screen, .skills-screen, .experience-screen, .education-screen, .contact-screen) {
+    color: var(--text-strong) !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+.about-screen {
+    background: radial-gradient(circle at 16% 8%, #302d69 0, transparent 42%), linear-gradient(145deg, #0b1020, #171229 58%, #090b12) !important;
+}
+
+.projects-screen {
+    background: radial-gradient(circle at 86% 2%, #53202e 0, transparent 38%), linear-gradient(145deg, #160b13, #111523 58%, #080a10) !important;
+}
+
+.publications-screen {
+    background: radial-gradient(circle at 16% 4%, #173c51 0, transparent 42%), linear-gradient(145deg, #08141d, #11152b 58%, #07090f) !important;
+}
+
+.skills-screen {
+    background: radial-gradient(circle at 88% 4%, #13445b 0, transparent 40%), linear-gradient(145deg, #07141c, #11162b 58%, #07090f) !important;
+}
+
+.experience-screen {
+    background: radial-gradient(circle at 14% 4%, #164631 0, transparent 40%), linear-gradient(145deg, #08150f, #111a24 58%, #07090f) !important;
+}
+
+.education-screen {
+    background: radial-gradient(circle at 84% 4%, #533343 0, transparent 38%), linear-gradient(145deg, #180d15, #171724 58%, #08090e) !important;
+}
+
+.contact-screen {
+    background: radial-gradient(circle at 14% 4%, #234154 0, transparent 40%), linear-gradient(145deg, #0a151d, #161423 58%, #08090f) !important;
+}
+
+:is(.about-header, .projects-header, .publications-header, .skills-header, .experience-header, .education-header, .contact-header) {
+    color: var(--text-strong) !important;
+    background: rgba(7, 9, 15, 0.78) !important;
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(18px) saturate(130%);
+}
+
+:is(.about-title, .projects-title, .publications-title, .skills-title, .experience-title, .education-title, .contact-title,
+    .profile-name, .section-title, .project-title, .category-title, .company-name, .position-title,
+    .institution-name, .degree-title, .paper-card h2, .publication-section-title, .contact-info h3) {
+    color: var(--text-strong) !important;
+}
+
+:is(.about-text, .about-text p, .profile-title, .project-description, .tech-label, .skill-name,
+    .story-description, .story-date, .institution-period, .degree-description, .paper-card p,
+    .publication-summary, .contact-info p, .availability-info p) {
+    color: var(--text-body) !important;
+}
+
+:is(.expertise-item, .project-card, .skill-category, .story-item, .highlight-card, .education-card,
+    .paper-card, .publication-stat, .contact-card, .availability-card) {
+    color: var(--text-body) !important;
+    background: linear-gradient(145deg, rgba(25, 32, 47, 0.9), rgba(12, 16, 25, 0.92)) !important;
+    border: 1px solid var(--line) !important;
+    box-shadow: 0 22px 50px -32px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.07) !important;
+}
+
+:is(.project-card, .skill-category, .story-item, .education-card, .paper-card, .contact-card):hover {
+    border-color: rgba(105, 230, 255, 0.4) !important;
+    box-shadow: 0 28px 58px -30px rgba(0, 0, 0, 0.95), 0 0 28px rgba(105, 230, 255, 0.08) !important;
+}
+
+.skill-level {
+    display: none !important;
+}
+
+.skill-item::after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    flex: 0 0 7px;
+    border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 12px rgba(105, 230, 255, 0.7);
+}
+
+:is(.about-screen, .projects-screen, .publications-screen, .skills-screen, .experience-screen, .education-screen, .contact-screen).show {
+    animation: appSceneIn 0.68s cubic-bezier(0.16, 0.84, 0.24, 1) both !important;
+}
+
+:is(.about-screen, .projects-screen, .publications-screen, .skills-screen, .experience-screen, .education-screen, .contact-screen).show.closing {
+    animation: appSceneOut 0.42s cubic-bezier(0.4, 0, 1, 1) both !important;
+}
+
+@media (max-width: 760px) {
+    .app-grid {
+        width: 100%;
+        grid-template-columns: repeat(3, minmax(74px, 1fr));
+        gap: 24px 10px;
+        padding: 36px 14px 20px;
+    }
+
+    .app-icon .icon-bg {
+        width: 58px;
+        height: 58px;
+    }
+
+    .android-dock {
+        width: calc(100% - 24px);
+        margin-bottom: 10px;
+        gap: 24px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :is(.about-screen, .projects-screen, .publications-screen, .skills-screen, .experience-screen, .education-screen, .contact-screen).show,
+    :is(.about-screen, .projects-screen, .publications-screen, .skills-screen, .experience-screen, .education-screen, .contact-screen).show.closing {
+        animation: none !important;
+    }
+}

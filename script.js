@@ -105,177 +105,79 @@ document.addEventListener('DOMContentLoaded', function() {
     const skillsBackButton = document.getElementById('skillsBackButton');
     const educationBackButton = document.getElementById('educationBackButton');
     const contactBackButton = document.getElementById('contactBackButton');
+
+    const appScreens = {
+        about: aboutScreen,
+        projects: projectsScreen,
+        publications: publicationsScreen,
+        experience: experienceScreen,
+        skills: skillsScreen,
+        education: educationScreen,
+        contact: contactScreen
+    };
+
+    function openScreen(screen) {
+        if (!screen) return;
+        androidHome.classList.add('hide');
+        screen.classList.remove('closing');
+        setTimeout(() => screen.classList.add('show'), 120);
+    }
+
+    function closeScreen(screen) {
+        if (!screen) return;
+        screen.classList.add('closing');
+        setTimeout(() => androidHome.classList.remove('hide'), 100);
+        setTimeout(() => screen.classList.remove('show', 'closing'), 500);
+    }
     
     appIcons.forEach(icon => {
         icon.addEventListener('click', function() {
             const app = this.getAttribute('data-app');
             console.log(`Clicked on ${app} app`);
-            
-            // Handle about app specifically
-            if (app === 'about') {
-                // Hide the android home screen
-                androidHome.classList.add('hide');
-                
-                // Show the about screen after a short delay
-                setTimeout(() => {
-                    aboutScreen.classList.add('show');
-                }, 200);
-            }
-            
-            // Handle projects app specifically
-            if (app === 'projects') {
-                // Hide the android home screen
-                androidHome.classList.add('hide');
-                
-                // Show the projects screen after a short delay
-                setTimeout(() => {
-                    projectsScreen.classList.add('show');
-                }, 200);
-            }
 
-            // Handle publications app specifically
-            if (app === 'publications') {
-                androidHome.classList.add('hide');
-
-                setTimeout(() => {
-                    publicationsScreen.classList.add('show');
-                }, 200);
-            }
-            
-            // Handle experience app specifically
-            if (app === 'experience') {
-                // Hide the android home screen
-                androidHome.classList.add('hide');
-                
-                // Show the experience screen after a short delay
-                setTimeout(() => {
-                    experienceScreen.classList.add('show');
-                }, 200);
-            }
-            
-            // Handle skills app specifically
-            if (app === 'skills') {
-                // Hide the android home screen
-                androidHome.classList.add('hide');
-                
-                // Show the skills screen after a short delay
-                setTimeout(() => {
-                    skillsScreen.classList.add('show');
-                }, 200);
-            }
-            
-            // Handle education app specifically
-            if (app === 'education') {
-                // Hide the android home screen
-                androidHome.classList.add('hide');
-                
-                // Show the education screen after a short delay
-                setTimeout(() => {
-                    educationScreen.classList.add('show');
-                }, 200);
-            }
-            
-            // Handle contact app specifically
-            if (app === 'contact') {
-                // Hide the android home screen
-                androidHome.classList.add('hide');
-                
-                // Show the contact screen after a short delay
-                setTimeout(() => {
-                    contactScreen.classList.add('show');
-                }, 200);
-            }
-            
-            // Add other app opening functionality here for other apps
+            openScreen(appScreens[app]);
         });
     });
     
     // Back button click handler for about screen
     backButton.addEventListener('click', function() {
-        // Hide the about screen
-        aboutScreen.classList.remove('show');
-        
-        // Show the android home screen after transition
-        setTimeout(() => {
-            androidHome.classList.remove('hide');
-        }, 200);
-        
+        closeScreen(aboutScreen);
         console.log('Back button clicked! Returning to home screen...');
     });
     
     // Back button click handler for projects screen
     projectsBackButton.addEventListener('click', function() {
-        // Hide the projects screen
-        projectsScreen.classList.remove('show');
-        
-        // Show the android home screen after transition
-        setTimeout(() => {
-            androidHome.classList.remove('hide');
-        }, 200);
-        
+        closeScreen(projectsScreen);
         console.log('Projects back button clicked! Returning to home screen...');
     });
 
     // Back button click handler for publications screen
     publicationsBackButton.addEventListener('click', function() {
-        publicationsScreen.classList.remove('show');
-
-        setTimeout(() => {
-            androidHome.classList.remove('hide');
-        }, 200);
-
+        closeScreen(publicationsScreen);
         console.log('Publications back button clicked! Returning to home screen...');
     });
     
     // Back button click handler for experience screen
     experienceBackButton.addEventListener('click', function() {
-        // Hide the experience screen
-        experienceScreen.classList.remove('show');
-        
-        // Show the android home screen after transition
-        setTimeout(() => {
-            androidHome.classList.remove('hide');
-        }, 200);
-        
+        closeScreen(experienceScreen);
         console.log('Experience back button clicked! Returning to home screen...');
     });
     
     // Back button click handler for skills screen
     skillsBackButton.addEventListener('click', function() {
-        // Hide the skills screen
-        skillsScreen.classList.remove('show');
-        
-        // Show the android home screen after transition
-        setTimeout(() => {
-            androidHome.classList.remove('hide');
-        }, 200);
-        
+        closeScreen(skillsScreen);
         console.log('Skills back button clicked! Returning to home screen...');
     });
     
     // Back button click handler for education screen
     educationBackButton.addEventListener('click', function() {
-        // Hide the education screen
-        educationScreen.classList.remove('show');
-        
-        // Show the android home screen after transition
-        setTimeout(() => {
-            androidHome.classList.remove('hide');
-        }, 200);
-        
+        closeScreen(educationScreen);
         console.log('Education back button clicked! Returning to home screen...');
     });
     
     // Back button click handler for contact screen
     contactBackButton.addEventListener('click', function() {
-        // Hide the contact screen
-        contactScreen.classList.remove('show');
-        
-        // Show the android home screen after transition
-        setTimeout(() => {
-            androidHome.classList.remove('hide');
-        }, 200);
-        
+        closeScreen(contactScreen);
         console.log('Contact back button clicked! Returning to home screen...');
     });
     
