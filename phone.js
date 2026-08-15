@@ -255,6 +255,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    lockScreen.addEventListener('pointercancel', () => {
+        swipeStartY = null;
+        lockScreen.classList.remove('swiping');
+        lockScreen.style.removeProperty('--swipe-distance');
+    });
+
     statusBar.addEventListener('click', () => {
         updateShadeClock();
         setOverlay(notificationShade, true);

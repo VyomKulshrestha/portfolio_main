@@ -546,6 +546,17 @@ body.device-active:not(.device-locked) .system-navigation {
 }
 
 .system-navigation button:focus-visible { outline: 2px solid var(--system-blue); border-radius: 8px; }
+
+.home-widget:focus-visible,
+.quick-toggle:focus-visible,
+.notification-card:focus-visible,
+.shade-close:focus-visible,
+.recent-card:focus-visible,
+#clearRecents:focus-visible,
+.power-actions button:focus-visible {
+    outline: 2px solid var(--system-blue);
+    outline-offset: 3px;
+}
 .nav-back { width: 12px; height: 12px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(45deg); }
 .nav-home { width: 15px; height: 15px; border: 2px solid #fff; border-radius: 50%; }
 .nav-recents { width: 14px; height: 14px; border: 2px solid #fff; border-radius: 3px; }
