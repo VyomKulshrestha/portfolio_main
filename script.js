@@ -1,4 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const openExternal = (url) => window.open(url, '_blank', 'noopener,noreferrer');
+
+    document.querySelectorAll('a[target="_blank"]').forEach(link => {
+        link.setAttribute('rel', 'noopener noreferrer');
+    });
+
+    document.querySelectorAll('.app-icon, .dock-icon, .contact-card').forEach(control => {
+        control.setAttribute('role', 'button');
+        control.setAttribute('tabindex', '0');
+        control.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                control.click();
+            }
+        });
+    });
+
     const powerButton = document.getElementById('powerButton');
     const androidScreen = document.getElementById('androidScreen');
     const lockScreen = document.getElementById('lockScreen');
@@ -76,12 +93,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const appIcons = document.querySelectorAll('.app-icon');
     const aboutScreen = document.getElementById('aboutScreen');
     const projectsScreen = document.getElementById('projectsScreen');
+    const publicationsScreen = document.getElementById('publicationsScreen');
     const experienceScreen = document.getElementById('experienceScreen');
     const skillsScreen = document.getElementById('skillsScreen');
     const educationScreen = document.getElementById('educationScreen');
     const contactScreen = document.getElementById('contactScreen');
     const backButton = document.getElementById('backButton');
     const projectsBackButton = document.getElementById('projectsBackButton');
+    const publicationsBackButton = document.getElementById('publicationsBackButton');
     const experienceBackButton = document.getElementById('experienceBackButton');
     const skillsBackButton = document.getElementById('skillsBackButton');
     const educationBackButton = document.getElementById('educationBackButton');
@@ -111,6 +130,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Show the projects screen after a short delay
                 setTimeout(() => {
                     projectsScreen.classList.add('show');
+                }, 200);
+            }
+
+            // Handle publications app specifically
+            if (app === 'publications') {
+                androidHome.classList.add('hide');
+
+                setTimeout(() => {
+                    publicationsScreen.classList.add('show');
                 }, 200);
             }
             
@@ -187,6 +215,17 @@ document.addEventListener('DOMContentLoaded', function() {
         
         console.log('Projects back button clicked! Returning to home screen...');
     });
+
+    // Back button click handler for publications screen
+    publicationsBackButton.addEventListener('click', function() {
+        publicationsScreen.classList.remove('show');
+
+        setTimeout(() => {
+            androidHome.classList.remove('hide');
+        }, 200);
+
+        console.log('Publications back button clicked! Returning to home screen...');
+    });
     
     // Back button click handler for experience screen
     experienceBackButton.addEventListener('click', function() {
@@ -255,11 +294,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     break;
                 case 'linkedin':
                     // Open LinkedIn profile
-                    window.open('https://www.linkedin.com/in/vyomkulshrestha/', '_blank');
+                    openExternal('https://www.linkedin.com/in/vyomkulshrestha/');
                     break;
                 case 'github':
                     // Open GitHub profile
-                    window.open('https://github.com/VyomKulshrestha', '_blank');
+                    openExternal('https://github.com/VyomKulshrestha');
                     break;
                 default:
                     console.log(`No action defined for ${contactType}`);
@@ -279,15 +318,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 switch (app) {
                     case 'github':
                         // Open GitHub profile
-                        window.open('https://github.com/VyomKulshrestha', '_blank');
+                        openExternal('https://github.com/VyomKulshrestha');
                         break;
                     case 'linkedin':
                         // Open LinkedIn profile
-                        window.open('https://www.linkedin.com/in/vyomkulshrestha/', '_blank');
+                        openExternal('https://www.linkedin.com/in/vyomkulshrestha/');
                         break;
                     case 'resume':
                         // Open resume from Google Drive
-                        window.open('https://drive.google.com/file/d/1ceyaaEz2zKI-Nfn6D7tIUXouDyInk5xm/view?usp=sharing', '_blank');
+                        openExternal('https://drive.google.com/file/d/1ceyaaEz2zKI-Nfn6D7tIUXouDyInk5xm/view?usp=sharing');
                         break;
                     default:
                         console.log(`No action defined for ${app}`);
