@@ -8,6 +8,7 @@
     <title>Vyom Kulshrestha | Systems &amp; AI Engineer</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="cinematic.css">
+    <link rel="stylesheet" href="phone.css">
 </head>
 <body>
     <div class="container">
@@ -21,6 +22,7 @@
                 </svg>
             </div>
             <div class="power-indicator"></div>
+            <p class="power-copy">Press to power on</p>
         </div>
         
         <!-- Android Logo and Loading Screen -->
@@ -77,8 +79,12 @@
                 </div>
                 <div class="user-info">
                     <div class="user-name">Vyom Kulshrestha</div>
-                    <div class="unlock-text">Click to unlock</div>
+                    <div class="unlock-text">Swipe up or tap to unlock</div>
                 </div>
+            </div>
+            <div class="swipe-affordance" aria-hidden="true">
+                <span class="swipe-chevron">⌃</span>
+                <span class="swipe-line"></span>
             </div>
         </div>
 
@@ -87,7 +93,7 @@
             <div class="home-background-overlay"></div>
 
             <!-- Status Bar -->
-            <div class="android-status-bar">
+            <div class="android-status-bar" id="statusBar" role="button" tabindex="0" aria-label="Open quick settings and notifications">
                 <div class="status-left">
                     <span class="status-time" id="statusTime">17:50</span>
                 </div>
@@ -99,6 +105,15 @@
                     </div>
                 </div>
             </div>
+
+            <button class="home-widget" id="homeWidget" type="button" aria-label="Open Research app">
+                <span class="widget-kicker">LIVE SYSTEM</span>
+                <span class="widget-main">Building safer agentic systems</span>
+                <span class="widget-sub">Heliox &middot; FerrumOS &middot; NucleScript</span>
+                <span class="signal-bars" aria-hidden="true">
+                    <i></i><i></i><i></i><i></i><i></i>
+                </span>
+            </button>
 
             <!-- App Grid -->
             <div class="app-grid">
@@ -150,6 +165,13 @@
                     </div>
                     <span class="app-label">Contact</span>
                 </div>
+
+                <div class="app-icon" data-app="system">
+                    <div class="icon-bg system-icon-bg">
+                        <span class="icon-text">⏻</span>
+                    </div>
+                    <span class="app-label">System</span>
+                </div>
             </div>
 
             <!-- Bottom Dock -->
@@ -182,6 +204,77 @@
                 </div>
             </div>
         </div>
+
+        <button class="device-side-key" id="sleepButton" type="button" aria-label="Put device to sleep" title="Sleep">
+            <span></span>
+        </button>
+
+        <section class="notification-shade" id="notificationShade" aria-label="Quick settings and notifications" aria-hidden="true">
+            <div class="shade-handle" aria-hidden="true"></div>
+            <div class="shade-header">
+                <div>
+                    <span class="shade-time" id="shadeTime">17:50</span>
+                    <span class="shade-date" id="shadeDate">Sunday, August 16</span>
+                </div>
+                <button class="shade-close" id="shadeClose" type="button" aria-label="Close quick settings">×</button>
+            </div>
+            <div class="quick-settings" aria-label="Quick settings">
+                <button class="quick-toggle active" type="button" data-toggle="wifi" aria-pressed="true"><span>◉</span>Wi-Fi</button>
+                <button class="quick-toggle" type="button" data-toggle="focus" aria-pressed="false"><span>◐</span>Focus</button>
+                <button class="quick-toggle active" type="button" data-toggle="motion" aria-pressed="true"><span>≈</span>Motion</button>
+                <button class="quick-toggle" type="button" data-toggle="sleep" aria-pressed="false"><span>☾</span>Sleep</button>
+            </div>
+            <div class="brightness-control">
+                <span aria-hidden="true">☀</span>
+                <input id="brightnessSlider" type="range" min="45" max="100" value="88" aria-label="Screen brightness">
+            </div>
+            <div class="notification-list">
+                <p class="system-label">NOTIFICATIONS</p>
+                <button class="notification-card" type="button" data-open-app="publications">
+                    <span class="notification-app">Research</span>
+                    <strong>Kernel safety paper is live</strong>
+                    <span>13,697 OS-state transitions · Open evidence</span>
+                </button>
+                <button class="notification-card" type="button" data-open-app="projects">
+                    <span class="notification-app">GitHub</span>
+                    <strong>23 public repositories</strong>
+                    <span>Explore Heliox OS, FerrumOS, Nucle-OS, and more</span>
+                </button>
+            </div>
+        </section>
+
+        <section class="recents-screen" id="recentsScreen" aria-label="Recent apps" aria-hidden="true">
+            <div class="recents-header">
+                <div><span class="system-label">OVERVIEW</span><h2>Recent apps</h2></div>
+                <button id="clearRecents" type="button">Clear all</button>
+            </div>
+            <div class="recent-stack" id="recentStack">
+                <div class="recents-empty">Open an app and it will appear here.</div>
+            </div>
+        </section>
+
+        <section class="power-menu" id="powerMenu" aria-label="Power menu" aria-hidden="true">
+            <button class="power-menu-backdrop" id="powerMenuBackdrop" type="button" aria-label="Close power menu"></button>
+            <div class="power-sheet" role="dialog" aria-modal="true" aria-labelledby="powerMenuTitle">
+                <div class="power-sheet-head">
+                    <span class="system-label">DEVICE CONTROLS</span>
+                    <h2 id="powerMenuTitle">What should the phone do?</h2>
+                </div>
+                <div class="power-actions">
+                    <button type="button" data-power-action="sleep"><span>☾</span><strong>Sleep</strong><small>Return to lock screen</small></button>
+                    <button type="button" data-power-action="restart"><span>↻</span><strong>Restart</strong><small>Replay the boot sequence</small></button>
+                    <button class="danger" type="button" data-power-action="off"><span>⏻</span><strong>Power off</strong><small>Close the tab when permitted</small></button>
+                </div>
+            </div>
+        </section>
+
+        <nav class="system-navigation" id="systemNavigation" aria-label="Android navigation">
+            <button type="button" data-system-action="back" aria-label="Back"><span class="nav-back"></span></button>
+            <button type="button" data-system-action="home" aria-label="Home"><span class="nav-home"></span></button>
+            <button type="button" data-system-action="recents" aria-label="Recent apps"><span class="nav-recents"></span></button>
+        </nav>
+
+        <div class="system-toast" id="systemToast" role="status" aria-live="polite"></div>
 
         <!-- About Screen -->
         <div class="about-screen" id="aboutScreen">
@@ -1069,5 +1162,6 @@
     </div>
     
     <script src="script.js"></script>
+    <script src="phone.js"></script>
 </body>
 </html> 
