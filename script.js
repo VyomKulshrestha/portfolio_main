@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         break;
                     case 'resume':
                         // Open resume from Google Drive
-                        openExternal('https://drive.google.com/file/d/1ceyaaEz2zKI-Nfn6D7tIUXouDyInk5xm/view?usp=sharing');
+                        openExternal('https://drive.google.com/file/d/1CSUZR3t8j7y2hn7MHHBaQuEib_NYW62w/view?usp=sharing');
                         break;
                     default:
                         console.log(`No action defined for ${app}`);
